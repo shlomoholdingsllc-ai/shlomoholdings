@@ -1,53 +1,122 @@
-import { Search, Brain, TrendingUp } from 'lucide-react';
+import { Search, Sparkles, ArrowRight } from 'lucide-react';
+import { useEffect, useRef, useState } from 'react';
 
 const services = [
   {
+    image: '/imgs/seo-service.png',
     icon: Search,
-    title: 'SEO Optimization',
-    description: 'Boost your search rankings with proven SEO strategies. We optimize your website to increase organic traffic and improve visibility on search engines.'
+    title: 'SEO Marketing',
+    description: 'Dominate search rankings with data-driven SEO strategies. Our proven methodology combines technical optimization, content excellence, and authoritative link building to deliver sustainable organic growth.',
+    features: [
+      'Technical SEO audits & optimization',
+      'Keyword research & content strategy',
+      'Link building & authority development',
+      'Performance tracking & reporting',
+    ],
   },
   {
-    icon: Brain,
+    image: '/imgs/ai-marketing-service.png',
+    icon: Sparkles,
     title: 'AI Marketing',
-    description: 'Harness the power of artificial intelligence to automate and enhance your marketing campaigns. Smart targeting, personalized content, and predictive analytics.'
+    description: 'Leverage artificial intelligence to automate campaigns, predict customer behavior, and optimize marketing ROI. Our AI-powered solutions deliver personalized experiences at scale.',
+    features: [
+      'Predictive analytics & customer insights',
+      'Automated campaign optimization',
+      'Personalization at scale',
+      'AI-powered content generation',
+    ],
   },
-  {
-    icon: TrendingUp,
-    title: 'Growth Strategies',
-    description: 'Develop comprehensive digital marketing strategies that drive real business growth. Data-driven insights to maximize ROI and scale your business.'
-  }
 ];
 
 const Services = () => {
+  const [visibleCards, setVisibleCards] = useState<boolean[]>([false, false]);
+  const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  useEffect(() => {
+    const observers = cardRefs.current.map((ref, index) => {
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            setTimeout(() => {
+              setVisibleCards((prev) => {
+                const newVisible = [...prev];
+                newVisible[index] = true;
+                return newVisible;
+              });
+            }, index * 100);
+          }
+        },
+        { threshold: 0.3 }
+      );
+
+      if (ref) observer.observe(ref);
+      return observer;
+    });
+
+    return () => {
+      observers.forEach((observer) => observer.disconnect());
+    };
+  }, []);
+
   return (
-    <section id="services" className="py-16 md:py-24 bg-neutral-50">
-      <div className="max-w-[1280px] mx-auto px-6 md:px-12 lg:px-12">
-        <div className="text-center mb-12 md:mb-16">
+    <section id="services" className="py-24 md:py-32 bg-neutral-50">
+      <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16">
+        <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-neutral-900 mb-4">
             Our Services
           </h2>
           <p className="text-lg md:text-xl text-neutral-600 max-w-2xl mx-auto">
-            Comprehensive marketing solutions designed to accelerate your business growth
+            Cutting-edge solutions for unprecedented growth
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {services.map((service, index) => {
             const Icon = service.icon;
             return (
               <div
                 key={index}
-                className="bg-white p-8 rounded-lg border border-neutral-200 shadow-sm hover:shadow-cardHover hover:-translate-y-1 hover:scale-101 active:scale-99 transition-all duration-250 cursor-pointer"
+                ref={(el) => (cardRefs.current[index] = el)}
+                className={`bg-white rounded-lg border border-neutral-200 shadow-md hover:shadow-xl hover:-translate-y-2 hover:scale-102 transition-all duration-400 overflow-hidden ${
+                  visibleCards[index] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+                }`}
+                style={{ transition: 'all 0.4s ease-out' }}
               >
-                <div className="w-14 h-14 bg-primary-100 rounded-lg flex items-center justify-center mb-6">
-                  <Icon className="w-6 h-6 text-primary-500" />
+                <div className="relative h-60 overflow-hidden">
+                  <img
+                    src={service.image}
+                    alt={service.title}
+                    className="w-full h-full object-cover hover:scale-110 transition-transform duration-600"
+                  />
+                  <div className="absolute bottom-0 left-8 transform translate-y-1/2">
+                    <div className="w-16 h-16 bg-primary-100 rounded-md flex items-center justify-center shadow-lg">
+                      <Icon className="w-8 h-8 text-primary-500" />
+                    </div>
+                  </div>
                 </div>
-                <h3 className="text-2xl font-semibold text-neutral-900 mb-3">
-                  {service.title}
-                </h3>
-                <p className="text-base text-neutral-600 leading-relaxed">
-                  {service.description}
-                </p>
+
+                <div className="p-12 pt-10">
+                  <h3 className="text-2xl font-semibold text-neutral-900 mb-4">
+                    {service.title}
+                  </h3>
+                  <p className="text-base text-neutral-600 leading-relaxed mb-6">
+                    {service.description}
+                  </p>
+
+                  <ul className="space-y-3 mb-6">
+                    {service.features.map((feature, idx) => (
+                      <li key={idx} className="flex items-start text-sm text-neutral-600">
+                        <span className="text-primary-500 mr-2">✓</span>
+                        {feature}
+                      </li>
+                    ))}
+                  </ul>
+
+                  <button className="flex items-center text-base font-semibold text-primary-500 hover:text-primary-600 group">
+                    Learn More
+                    <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform duration-200" />
+                  </button>
+                </div>
               </div>
             );
           })}
