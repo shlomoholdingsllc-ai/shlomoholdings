@@ -67,7 +67,7 @@ const Contact = () => {
     const body = encodeURIComponent(
       `Name: ${formData.name}\nEmail: ${formData.email}\nPhone: ${formData.phone}\nService Interest: ${formData.service}\n\nMessage:\n${formData.message}`
     );
-    window.location.href = `mailto:contact@shlomoholdings.com?subject=${subject}&body=${body}`;
+    window.location.href = `mailto:contact@shlomoholdingsservicesllc.com?subject=${subject}&body=${body}`;
     
     setIsSubmitted(true);
     setFormData({ name: '', email: '', phone: '', service: '', message: '' });
@@ -230,10 +230,10 @@ const Contact = () => {
                   <div>
                     <div className="font-medium text-white">Email</div>
                     <a
-                      href="mailto:contact@shlomoholdings.com"
+                      href="mailto:contact@shlomoholdingsservicesllc.com"
                       className="text-white/80 hover:text-white transition-colors"
                     >
-                      contact@shlomoholdings.com
+                      contact@shlomoholdingsservicesllc.com
                     </a>
                   </div>
                 </div>

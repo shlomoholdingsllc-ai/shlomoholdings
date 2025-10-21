@@ -24,8 +24,8 @@ const Footer = () => {
             </p>
             <div className="space-y-2 text-sm text-primary-100">
               <div>
-                <a href="mailto:contact@shlomoholdings.com" className="hover:text-white transition-colors">
-                  contact@shlomoholdings.com
+                <a href="mailto:contact@shlomoholdingsservicesllc.com" className="hover:text-white transition-colors">
+                  contact@shlomoholdingsservicesllc.com
                 </a>
               </div>
               <div>
