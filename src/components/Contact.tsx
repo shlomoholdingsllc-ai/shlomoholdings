@@ -163,7 +163,7 @@ const Contact = () => {
                   className={`w-full h-14 px-4 bg-white/90 backdrop-blur-sm border-2 rounded-md text-base text-neutral-800 focus:outline-none focus:border-primary-500 focus:ring-4 focus:ring-primary-500/20 transition-all ${
                     errors.phone ? 'border-red-500' : 'border-neutral-200'
                   }`}
-                  placeholder="954-743-7632"
+                  placeholder="(888) 265-5576"
                 />
                 {errors.phone && (
                   <p className="mt-2 text-sm text-red-200">{errors.phone}</p>
@@ -245,10 +245,10 @@ const Contact = () => {
                   <div>
                     <div className="font-medium text-white">Phone</div>
                     <a
-                      href="tel:+19547437632"
+                      href="tel:+18882655576"
                       className="text-white/80 hover:text-white transition-colors"
                     >
-                      954-743-7632
+                      (888) 265-5576
                     </a>
                   </div>
                 </div>
@@ -260,8 +260,7 @@ const Contact = () => {
                   <div>
                     <div className="font-medium text-white">Address</div>
                     <div className="text-white/80">
-                      609 North 46th Avenue<br />
-                      Hollywood, FL 33021
+                      30 N Gould St Sheridan WY 82801 STE 22609
                     </div>
                   </div>
                 </div>

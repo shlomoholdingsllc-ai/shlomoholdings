@@ -29,13 +29,12 @@ const Footer = () => {
                 </a>
               </div>
               <div>
-                <a href="tel:+19547437632" className="hover:text-white transition-colors">
-                  954-743-7632
+                <a href="tel:+18882655576" className="hover:text-white transition-colors">
+                  (888) 265-5576
                 </a>
               </div>
               <div className="leading-relaxed">
-                609 North 46th Avenue<br />
-                Hollywood, FL 33021
+                30 N Gould St Sheridan WY 82801 STE 22609
               </div>
             </div>
           </div>
